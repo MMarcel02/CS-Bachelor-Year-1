@@ -1,0 +1,50 @@
+START
+    WHILE true:
+        clearScreen()
+        displayLegend()
+        displayWorld()
+        displayInventory()
+
+        PRINT available actions
+        input = getUserInput()
+
+        IF input is movement:
+            movePlayer(input)
+        ELSE IF input is "M":
+            mineBlock()
+        ELSE IF input is "P":
+            displayInventory()
+            blockType = getUserInput()
+            placeBlock(blockType)
+        ELSE IF input is "C":
+            displayCraftingRecipes()
+            recipe = getUserInput()
+            craftItem(recipe)
+        ELSE IF input is "I":
+            interactWithWorld()
+        ELSE IF input is "Save":
+            filename = getUserInput()
+            saveGame(filename)
+        ELSE IF input is "Load":
+            filename = getUserInput()
+            loadGame(filename)
+        ELSE IF input is "Look":
+            lookAround()
+        ELSE IF input is "Unlock":
+            enableUnlockMode()
+        ELSE IF input is "Open":
+            attemptToOpenSecretDoor()
+        ELSE IF input is "Exit":
+            PRINT "Goodbye!"
+            BREAK
+        ELSE:
+            PRINT "Invalid input"
+
+        IF secretDoorUnlocked:
+            clearScreen()
+            PRINT "You have entered the secret area!"
+            inSecretArea = true
+            resetWorld()
+            fillInventory()
+            disableSecretDoor()
+            waitForEnter()
